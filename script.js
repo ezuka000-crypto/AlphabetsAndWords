@@ -7,7 +7,7 @@ const state = {
     bubbles: [],
     isPlaying: false,
     animationFrameId: null,
-    speechRate: 0.8,
+    speechRate: 0.6,
     colors: ['#FFB7B2', '#B5EAD7', '#C7CEEA', '#FFDAC1', '#E2F0CB', '#FF9AA2']
 };
 
@@ -165,9 +165,9 @@ function initGame() {
     // Filter words based on difficulty
     const filteredWords = wordList.filter(word => word.level === state.difficulty);
 
-    // Select 10-15 random words from the filtered list
-    // If fewer than 10 words, use all of them
-    const count = Math.min(filteredWords.length, Math.floor(Math.random() * 6) + 10);
+    // Select 5-7 random words from the filtered list
+    // If fewer than 5 words, use all of them
+    const count = Math.min(filteredWords.length, Math.floor(Math.random() * 3) + 5);
     const shuffled = [...filteredWords].sort(() => 0.5 - Math.random());
     state.currentWords = shuffled.slice(0, count);
 

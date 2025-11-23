@@ -1,0 +1,297 @@
+:root {
+    --primary-color: #FFB7B2;
+    /* Pastel Red */
+    --secondary-color: #B5EAD7;
+    /* Pastel Green */
+    --accent-color: #C7CEEA;
+    /* Pastel Purple */
+    --bg-color: #FFDAC1;
+    /* Pastel Orange/Peach */
+    --text-color: #555;
+    --white: #ffffff;
+    --font-en: 'Fredoka', sans-serif;
+    --font-ja: 'M PLUS Rounded 1c', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-ja);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+    /* Prevent scrolling */
+    height: 100vh;
+    width: 100vw;
+}
+
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.3s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+h1 {
+    font-family: var(--font-en);
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Buttons */
+button {
+    font-family: var(--font-en);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    outline: none;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem 3rem;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: #555;
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-small {
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+/* Start Screen */
+.mode-select,
+.difficulty-select {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 500px;
+}
+
+.difficulty-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.radio-label input {
+    display: none;
+}
+
+.radio-custom {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+}
+
+.radio-label input:checked+.radio-custom::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Game Screen */
+#game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass through to bubbles */
+}
+
+#game-ui button {
+    pointer-events: auto;
+}
+
+#listen-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 1rem;
+    font-family: var(--font-ja);
+    font-weight: bold;
+}
+
+#score-display {
+    font-family: var(--font-en);
+    font-size: 1.5rem;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+#game-area {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Bubbles */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    box-shadow: inset -5px -5px 15px rgba(0, 0, 0, 0.1), 2px 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.1s;
+    will-change: transform, left, top;
+    /* Random pastel colors will be assigned via JS */
+}
+
+.bubble:active {
+    transform: scale(0.95);
+}
+
+.bubble.shake {
+    animation: shake 0.5s;
+}
+
+.bubble.pop {
+    animation: pop 0.3s forwards;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px) rotate(-5deg);
+    }
+
+    50% {
+        transform: translateX(5px) rotate(5deg);
+    }
+
+    75% {
+        transform: translateX(-5px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Clear Screen */
+#confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn-primary {
+        padding: 0.8rem 2rem;
+        font-size: 1.2rem;
+    }
+
+    #listen-btn {
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+    }
+
+    .bubble {
+        font-size: 1rem;
+    }
+
+    /* Base size, JS will adjust */
+}

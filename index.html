@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Balloon Catch</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=M+PLUS+Rounded+1c:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <h1>English Balloon Catch</h1>
+        <div class="mode-select">
+            <p>モードをえらんでね</p>
+            <label class="radio-label">
+                <input type="radio" name="mode" value="english" checked>
+                <span class="radio-custom"></span>
+                English Mode (Apple → Apple)
+            </label>
+            <label class="radio-label">
+                <input type="radio" name="mode" value="japanese">
+                <span class="radio-custom"></span>
+                Japanese Mode (Apple → りんご)
+            </label>
+        </div>
+
+        <div class="difficulty-select">
+            <p>むずかしさをえらんでね</p>
+            <div class="difficulty-options">
+                <label class="radio-label">
+                    <input type="radio" name="difficulty" value="1" checked>
+                    <span class="radio-custom"></span>
+                    Level 1 (Alphabet)
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="difficulty" value="2">
+                    <span class="radio-custom"></span>
+                    Level 2 (Numbers/Colors)
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="difficulty" value="3">
+                    <span class="radio-custom"></span>
+                    Level 3 (Words)
+                </label>
+            </div>
+        </div>
+        <button id="start-btn" class="btn-primary">Game Start!</button>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <div id="game-ui">
+            <button id="exit-btn" class="btn-small">Exit</button>
+            <button id="listen-btn" class="btn-secondary">🔊 もういちどきく</button>
+            <div id="score-display">Remaining: <span id="remaining-count">0</span></div>
+        </div>
+        <div id="game-area">
+            <!-- Bubbles will be generated here -->
+        </div>
+    </div>
+
+    <!-- Clear Screen -->
+    <div id="clear-screen" class="screen">
+        <h1>Congratulations!</h1>
+        <p>全部クリア！すごいね！</p>
+        <button id="restart-btn" class="btn-primary">Play Again</button>
+        <div id="confetti-container"></div>
+    </div>
+
+    <script src="words.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
